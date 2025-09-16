@@ -688,7 +688,7 @@ let obj = {
 ### `map()` - Transform each element
 ```javascript
 let nums = [1, 2, 3];
-let doubled = nums.map(x => x * 2);  // [2, 4, 6]
+let doubled = nums.map(x => x**2);  // [1, 4, 9]
 // Returns: New array with transformed elements
 ```
 
@@ -696,12 +696,20 @@ let doubled = nums.map(x => x * 2);  // [2, 4, 6]
 ```javascript
 nums.forEach(x => console.log(x));   // Prints: 1, 2, 3
 // Returns: undefined (side effects only)
+
+let ans = arr.forEach(a => a**2)
+console.log(ans)  //  Returns: undefined
+// .forEach() is meant for side effects (like logging, updating something), not for building a new array. That’s why your ans is undefined
 ```
 
 ### `filter()` - Keep elements that pass test
 ```javascript
 let evens = nums.filter(x => x % 2 === 0);  // [2]
 // Returns: New array with filtered elements
+
+let res = arr.filter(a => a-5)
+console.log(res)
+// .filter() expects your callback to return a boolean (true → keep the element, false → drop it).
 ```
 
 ### `reduce()` - Reduce to single value
