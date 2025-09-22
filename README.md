@@ -935,3 +935,35 @@ let arr2 = [...arr1, 3, 4];  // [1, 2, 3, 4]
 ```
 
 ---
+
+### IIFE (Immediately Invoked Function Expression)
+An IIFE is a function expression that runs immediately after it’s defined, used mainly for creating private (local) scope, avoiding global pollution, and initializing code. It’s not hoisted because it’s an expression, not a declaration.
+
+#### Avoid polluting the global scope
+
+```javascript
+(function() {
+  var secret = "hidden";
+  console.log("Inside IIFE:", secret);
+})();
+
+console.log(secret); // ❌ ReferenceError
+```
+
+#### Data privacy / encapsulation
+- Great for hiding implementation details.
+- Nothing leaks into the outer/global scope unless explicitly returned.
+
+```javascript
+const counter = (function() {
+  let count = 0;  // private variable
+  return {
+    increment: () => ++count,
+    get: () => count
+  };
+})();
+
+console.log(counter.increment()); // 1
+console.log(counter.increment()); // 2
+console.log(counter.get());       // 2
+```
