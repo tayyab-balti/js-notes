@@ -728,6 +728,9 @@ let sum = nums.reduce((acc, x) => acc + x, 0);  // 6
 
 ## 11. Shallow Copy vs Deep Copy
 
+## 📌 Shallow Copy
+A **shallow copy** duplicates only the **top-level properties**, so nested objects/arrays are still shared by reference.
+
 ### Shallow Copy
 ```javascript
 // Methods: Object.assign(), spread operator, Array.from()
@@ -741,6 +744,8 @@ console.log(original.b.c); // 20 (changed!)
 ```
 
 ### Deep Copy
+A deep copy recursively clones everything, creating a fully independent object. Shallow copies are faster and lighter, while deep copies ensure complete immutability at higher cost.
+
 ```javascript
 // Method: JSON.parse(JSON.stringify()) - limited
 let deep = JSON.parse(JSON.stringify(original));
@@ -748,6 +753,17 @@ deep.b.c = 30;       // ✓ Completely independent
 
 // Limitations: loses functions, undefined, symbols, dates
 ```
+
+### ⚖️ Comparison Table
+
+| Feature               | Shallow Copy     | Deep Copy        |
+| --------------------- | ---------------- | ---------------- |
+| Top-level values      | Copied           | Copied           |
+| Nested objects/arrays | Reference shared | Fully duplicated |
+| Memory usage          | Lower            | Higher           |
+| Speed                 | Faster           | Slower           |
+| Independence          | Partial          | Complete         |
+
 
 ### Pass by Value vs Reference
 ```javascript
