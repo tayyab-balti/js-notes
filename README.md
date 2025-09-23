@@ -584,6 +584,27 @@ arr.includes(3);     // Returns true
 
 ---
 
+## 7. Objects
+👉 In JavaScript, everything (almost) is an object.
+An object is a collection of properties, where each property is a key-value pair.
+
+- Key → always a string or symbol
+- Value → can be anything (number, string, boolean, function, another object…)
+
+```javascript
+let person = {
+  name: "Ali",    // key = "name", value = "Ali"
+  age: 22,        // key = "age", value = 22
+};
+
+console.log(person.name);      // Ali
+console.log(person["age"]);    // 22
+```
+
+### ⚠️ When to use brackets?
+- If the property name has spaces or special characters
+- If the property name is stored in a variable
+
 ## 7. Loops: for & while
 
 ### `for` Loop - When you know iteration count
