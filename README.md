@@ -605,7 +605,81 @@ console.log(person["age"]);    // 22
 - If the property name has spaces or special characters
 - If the property name is stored in a variable
 
-## 7. Loops: for & while
+---
+
+## 8. Shallow Copy vs Deep Copy
+
+### ❌ Wrong Assumption (common mistake)
+
+Many beginners think:
+```javascript
+let user = { name: "Ali" };
+let copy = user; // "copying"
+```
+
+But actually, this doesn’t copy the object. <br>
+👉 Both user and copy point to the same reference.
+
+```javascript
+copy.name = "Hamza";
+console.log(user.name); // Hamza (changed!)
+```
+So we need proper ways to copy.
+
+### 📌 Shallow Copy
+A **shallow copy** duplicates only the **top-level properties**, so nested objects/arrays are still shared by reference.
+
+```javascript
+// Methods: Object.assign(), spread operator, Array.from()
+let original = { a: 1, b: { c: 2 } };
+
+let shallow = { ...original };
+shallow.a = 10;      // ✓ Independent
+shallow.b.c = 20;    // ✗ Affects original!
+
+console.log(original.b.c); // 20 (changed!)
+```
+
+### Deep Copy
+A deep copy recursively clones everything, creating a fully independent object. Shallow copies are faster and lighter, while deep copies ensure complete immutability at higher cost.
+
+```javascript
+// Method: JSON.parse(JSON.stringify()) - limited
+let deep = JSON.parse(JSON.stringify(original));
+deep.b.c = 30;       // ✓ Completely independent
+
+// Limitations: loses functions, undefined, symbols, dates
+```
+
+### ⚖️ Comparison Table
+
+| Feature               | Shallow Copy     | Deep Copy        |
+| --------------------- | ---------------- | ---------------- |
+| Top-level values      | Copied           | Copied           |
+| Nested objects/arrays | Reference shared | Fully duplicated |
+| Memory usage          | Lower            | Higher           |
+| Speed                 | Faster           | Slower           |
+| Independence          | Partial          | Complete         |
+
+
+### Pass by Value vs Reference
+```javascript
+// Primitives → Pass by value
+let x = 5;
+let y = x;
+y = 10; // Only changes local copy
+console.log(x); // 5 (unchanged)
+
+// Objects → Pass by reference
+let obj1 = { name: "Ali" };
+let obj2 = obj1;
+obj2.name = "Hamza";
+console.log(obj1.name); // Hamza (changed!)
+```
+
+---
+
+## 9. Loops: for & while
 
 ### `for` Loop - When you know iteration count
 ```javascript
@@ -630,7 +704,7 @@ while (count < 3) {
 
 ---
 
-## 8. for...of vs for...in
+## 10. for...of vs for...in
 
 ### `for...of` - Iterate VALUES
 ```javascript
@@ -668,7 +742,7 @@ for (let item of arr) {
 
 ---
 
-## 9. Functions vs Arrow Functions
+## 11. Functions vs Arrow Functions
 
 ### Regular Functions
 ```javascript
@@ -704,7 +778,7 @@ let obj = {
 
 ---
 
-## 10. Array Iteration Methods
+## 12. Array Iteration Methods
 
 ### `map()` - Transform each element
 ```javascript
@@ -747,67 +821,7 @@ let sum = nums.reduce((acc, x) => acc + x, 0);  // 6
 
 ---
 
-## 11. Shallow Copy vs Deep Copy
-
-## 📌 Shallow Copy
-A **shallow copy** duplicates only the **top-level properties**, so nested objects/arrays are still shared by reference.
-
-### Shallow Copy
-```javascript
-// Methods: Object.assign(), spread operator, Array.from()
-let original = { a: 1, b: { c: 2 } };
-
-let shallow = { ...original };
-shallow.a = 10;      // ✓ Independent
-shallow.b.c = 20;    // ✗ Affects original!
-
-console.log(original.b.c); // 20 (changed!)
-```
-
-### Deep Copy
-A deep copy recursively clones everything, creating a fully independent object. Shallow copies are faster and lighter, while deep copies ensure complete immutability at higher cost.
-
-```javascript
-// Method: JSON.parse(JSON.stringify()) - limited
-let deep = JSON.parse(JSON.stringify(original));
-deep.b.c = 30;       // ✓ Completely independent
-
-// Limitations: loses functions, undefined, symbols, dates
-```
-
-### ⚖️ Comparison Table
-
-| Feature               | Shallow Copy     | Deep Copy        |
-| --------------------- | ---------------- | ---------------- |
-| Top-level values      | Copied           | Copied           |
-| Nested objects/arrays | Reference shared | Fully duplicated |
-| Memory usage          | Lower            | Higher           |
-| Speed                 | Faster           | Slower           |
-| Independence          | Partial          | Complete         |
-
-
-### Pass by Value vs Reference
-```javascript
-// Primitives: Pass by value
-let x = 5;
-function changeValue(val) {
-  val = 10;  // Only changes local copy
-}
-changeValue(x);
-console.log(x); // 5 (unchanged)
-
-// Objects: Pass by reference
-let obj = { name: "John" };
-function changeObject(o) {
-  o.name = "Jane";  // Changes original object
-}
-changeObject(obj);
-console.log(obj.name); // "Jane" (changed!)
-```
-
----
-
-## 12. Scope Types
+## 13. Scope Types
 
 ### Variable Scope (var)
 ```javascript
@@ -857,7 +871,7 @@ console.log(counter()); // 2
 
 ---
 
-## 13. Execution Context & Hoisting
+## 14. Execution Context & Hoisting
 
 ### Creation Phase
 1. **Memory allocation** for variables and functions
@@ -906,7 +920,7 @@ let x = 5;
 
 ---
 
-## 14. Additional Essential Topics
+## 15. Additional Essential Topics
 
 ### Event Loop & Asynchronous JavaScript
 ```javascript
